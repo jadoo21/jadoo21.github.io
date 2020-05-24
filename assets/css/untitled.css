@@ -1,0 +1,25 @@
+.row.center {
+  text-align: center;
+}
+
+.col-sm-4.col1 {
+  margin-left: 35%;
+  background-color: rgb(244,244,244);
+}
+
+.negmargin {
+  margin-top: -10%;
+}
+
+.bitmore {
+  margin-top: 1%;
+}
+
+.posmargin {
+  margin-top: 12%;
+}
+
+#image {
+  margin-left: 29px;
+}
+
