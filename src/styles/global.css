@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-surface text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100;
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    @apply bg-brand-600/90 text-white;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-600 dark:outline-brand-400;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .card-surface {
+    @apply rounded-xl border border-zinc-200 bg-white shadow-card dark:border-zinc-800 dark:bg-zinc-900;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-2xs font-semibold uppercase tracking-[0.14em] text-brand-600 dark:text-brand-400;
+  }
+
+  .code-block {
+    @apply rounded-lg border border-zinc-800 bg-zinc-950 px-4 py-3 font-mono text-xs leading-relaxed text-zinc-300;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(228 228 231 / 0.5) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(228 228 231 / 0.5) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 20%, transparent 70%);
+  }
+
+  .dark .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(39 39 42 / 0.6) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(39 39 42 / 0.6) 1px, transparent 1px);
+  }
+}
