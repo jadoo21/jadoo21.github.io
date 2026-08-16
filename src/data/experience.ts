@@ -1,0 +1,81 @@
+import type { ExperienceItem } from "../types";
+
+export const experience: ExperienceItem[] = [
+  {
+    company: "Tally Group",
+    role: "Developer",
+    location: "Hyderabad, India",
+    period: "Nov 2023 – Present",
+    current: true,
+    summary:
+      "Working on TALLY CIS, a SaaS product/web application for energy retailers, across frontend, backend and cloud systems.",
+    project: "TALLY CIS",
+    projectSlug: "tally-cis",
+    responsibilities: [
+      "Frontend and backend development for TALLY CIS",
+      "REST API integration between systems",
+      "Microservice-based feature work",
+      "Cloud services on Azure",
+      "Code reviews, pull requests and technical documentation",
+      "Agile delivery with dev kickoffs and technical discussions",
+    ],
+    technologies: [
+      "TypeScript",
+      "React",
+      "C#",
+      ".NET / .NET Core",
+      "Azure",
+      "Azure Functions",
+      "Azure Service Bus",
+      "Azure Web Apps",
+      "Azure Key Vault",
+      "Docker",
+      "Microservices",
+      "MassTransit",
+      "RabbitMQ",
+      "SQL Server",
+      "Entity Framework",
+      "LINQ",
+      "REST APIs",
+      "SOLID",
+      "Design Patterns",
+      "Azure DevOps",
+      "NuGet",
+    ],
+  },
+  {
+    company: "NCR Corporation",
+    role: "Software Engineer I",
+    location: "Hyderabad, India",
+    period: "Mar 2021 – Nov 2023",
+    current: false,
+    summary:
+      "Worked on Emerald, an enterprise retail product, contributing to APIs, UI development, reliability and testing.",
+    project: "Emerald",
+    projectSlug: "enterprise-retail",
+    responsibilities: [
+      "Developed and maintained enterprise retail software",
+      "Designed and implemented APIs",
+      "Improved reliability and performance",
+      "Cross-functional collaboration",
+      "UI automation and unit testing",
+      "Bug fixing and feature delivery",
+    ],
+    technologies: [
+      "C#",
+      ".NET",
+      "React",
+      "WPF",
+      "SQL Server",
+      "REST APIs",
+      "Unit Testing",
+      "UI Automation",
+    ],
+  },
+];
+
+export const experienceHighlights = [
+  { value: "5+", label: "Years Experience" },
+  { value: "2", label: "Enterprise Products" },
+  { value: "Full-Stack", label: "Frontend + Backend + Cloud" },
+];
