@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, Briefcase, FlaskConical } from "lucide-react";
+import { ArrowLeft, ArrowRight, Briefcase } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { CaseStudyBlocks } from "../components/projects/CaseStudyBlocks";
 import { Container } from "../components/layout/Container";
@@ -31,7 +31,6 @@ export default function CaseStudyPage() {
 
   const currentIndex = projects.findIndex((p) => p.slug === slug);
   const next = projects[(currentIndex + 1) % projects.length];
-  const isPersonal = caseStudy.category === "Personal";
 
   return (
     <>
@@ -42,25 +41,18 @@ export default function CaseStudyPage() {
               Work
             </Link>
             <span aria-hidden="true">/</span>
-            <span>{project.slug}</span>
+            <span>{project.title}</span>
           </div>
         </div>
 
         <header className="max-w-3xl py-10 sm:py-14">
           <div className="flex flex-wrap items-center gap-3">
             <p className="eyebrow">{caseStudy.subtitle}</p>
-            <Badge tone="outline" className={isPersonal ? "text-zinc-500" : ""}>
-              {isPersonal ? (
-                <span className="inline-flex items-center gap-1">
-                  <FlaskConical className="h-3 w-3" aria-hidden="true" />
-                  Personal Project
-                </span>
-              ) : (
-                <span className="inline-flex items-center gap-1 text-brand-600 dark:text-brand-400">
-                  <Briefcase className="h-3 w-3" aria-hidden="true" />
-                  Professional Experience
-                </span>
-              )}
+            <Badge tone="outline">
+              <span className="inline-flex items-center gap-1 text-brand-600 dark:text-brand-400">
+                <Briefcase className="h-3 w-3" aria-hidden="true" />
+                Professional Experience
+              </span>
             </Badge>
           </div>
           <h1 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-zinc-900 sm:text-4xl dark:text-white">

@@ -1,6 +1,7 @@
 import { Check, Info, TriangleAlert } from "lucide-react";
 import { Reveal } from "../ui/Reveal";
 import { ArchDiagram } from "../architecture/ArchDiagram";
+import { PaymentLifecycle } from "../work/PaymentLifecycle";
 import type { CaseStudyBlock } from "../../types";
 import { cn } from "../../lib/cn";
 
@@ -126,6 +127,21 @@ export function CaseStudyBlocks({ blocks }: { blocks: CaseStudyBlock[] }) {
                         note={block.note}
                       />
                     </div>
+                  </div>
+                </section>
+              </Reveal>
+            );
+
+          case "lifecycle":
+            return (
+              <Reveal key={index}>
+                <section>
+                  {block.eyebrow ? (
+                    <p className="eyebrow mb-3">{block.eyebrow}</p>
+                  ) : null}
+                  <BlockEyebrow title={block.title} />
+                  <div className="card-surface mt-6 p-6 sm:p-8">
+                    <PaymentLifecycle steps={block.steps} note={block.note} />
                   </div>
                 </section>
               </Reveal>

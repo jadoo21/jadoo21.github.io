@@ -6,14 +6,14 @@ export const siteConfig = {
   linkedin: "https://www.linkedin.com/in/rishabh-roshan/",
   github: "",
   resumeUrl: "/Rishabh-Roshan-Resume.pdf",
+  photoUrl: "/images/rishabh-roshan.jpg",
   url: "https://rishabhroshan.dev",
-  positioning: ["React", "TypeScript", ".NET", "Azure"],
-  tagline:
-    "I build production-grade enterprise applications across the frontend, backend and cloud.",
+  positioning: ["React", "TypeScript", ".NET", "AWS"],
+  tagline: "Building systems that scale.",
   description:
-    "Full-stack software engineer with experience building SaaS applications, REST APIs, microservices and cloud-based systems using React, TypeScript, .NET and Azure.",
+    "Rishabh Roshan is a Software Engineer specializing in React, TypeScript, .NET, cloud platforms and distributed systems.",
   about:
-    "I enjoy working across the stack — from frontend experiences and API design to distributed services, databases and cloud infrastructure.",
+    "I'm a full-stack software engineer who enjoys working across frontend experiences, backend services and cloud infrastructure.",
   yearsExperience: "5+",
 } as const;
 

@@ -9,9 +9,8 @@ import { cn } from "../../lib/cn";
 import { Button } from "../ui/Button";
 
 const navLinks = [
-  { to: "/work", label: "Work" },
-  { to: "/engineering", label: "Engineering" },
   { to: "/experience", label: "Experience" },
+  { to: "/work", label: "Work" },
   { to: "/about", label: "About" },
 ];
 
@@ -67,12 +66,12 @@ export function Navbar() {
       >
         <Link
           to="/"
-          className="flex items-center gap-2 rounded-md text-sm font-semibold tracking-tight text-zinc-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 dark:text-white"
+          aria-label="Rishabh Roshan — Software Engineer"
+          className="flex items-center gap-2 rounded-md font-semibold tracking-tight text-zinc-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 dark:text-white"
         >
           <span className="flex h-7 w-7 items-center justify-center rounded-md bg-brand-600 text-2xs font-bold text-white">
             RR
           </span>
-          {siteConfig.name}
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">
@@ -189,8 +188,11 @@ export function Navbar() {
               onClick={(event) => event.stopPropagation()}
             >
               <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-zinc-900 dark:text-white">
-                  {siteConfig.name}
+                <span className="flex items-center gap-2 text-sm font-semibold text-zinc-900 dark:text-white">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-md bg-brand-600 text-2xs font-bold text-white">
+                    RR
+                  </span>
+                  Software Engineer
                 </span>
                 <button
                   type="button"

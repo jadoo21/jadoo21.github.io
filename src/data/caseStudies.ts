@@ -1,11 +1,295 @@
-import type { CaseStudy } from "../types";
+import { contributions } from "./keyloop";
+import { getProject } from "./projects";
+import type { CaseStudy, Contribution } from "../types";
+
+function contributionStudy(slug: string, contribution: Contribution): CaseStudy {
+  const project = getProject(slug);
+  const step = (label: string) =>
+    contribution.steps.find((s) => s.label === label)?.text ?? "";
+
+  return {
+    projectSlug: project?.slug ?? slug,
+    title: project?.title ?? contribution.title,
+    subtitle: project?.tagline ?? "Keyloop contribution",
+    disclaimer:
+      "Described at a high level from professional experience. Simplified representation — this is not an exact depiction of internal Keyloop architecture.",
+    blocks: [
+      {
+        kind: "text",
+        eyebrow: "Overview",
+        title: project?.title ?? contribution.title,
+        paragraphs: [
+          project?.summary ?? "",
+          "This case study describes the engineering problem, my approach and the outcome at a professional, non-confidential level.",
+        ],
+      },
+      {
+        kind: "text",
+        eyebrow: "01 · Problem",
+        title: "What needed to change",
+        paragraphs: [step("Problem")],
+      },
+      {
+        kind: "list",
+        eyebrow: "02 · What I Did",
+        title: "Approach and delivery",
+        description: "The shape of the work end to end.",
+        items: [step("What I Did")],
+      },
+      {
+        kind: "list",
+        eyebrow: "03 · Technical Approach",
+        title: "How it was built",
+        description: "The technical decisions behind the delivery.",
+        items: [step("Technical Approach")],
+      },
+      {
+        kind: "callout",
+        tone: "info",
+        title: "Impact",
+        body: step("Impact"),
+      },
+    ],
+  };
+}
 
 export const caseStudies: Record<string, CaseStudy> = {
+  "keyloop-epayments-platform": {
+    projectSlug: "keyloop-epayments-platform",
+    title: "Keyloop ePayments Platform",
+    subtitle: "Distributed payment platform for automotive retail",
+    disclaimer:
+      "Simplified architecture representation. This diagram describes the general shape of the platform and is not an exact representation of proprietary Keyloop infrastructure.",
+    blocks: [
+      {
+        kind: "text",
+        eyebrow: "Overview",
+        title: "Payment systems for automotive dealerships",
+        paragraphs: [
+          "Keyloop ePayments is a distributed payment platform used across automotive dealerships. It handles the full lifecycle of a web payment — from orchestrating a transaction through customer communication and payment-provider integration to settlement and status reconciliation.",
+          "The platform is built as a set of payment-processing services covering transaction orchestration, settlement processing, SMS/email communication, payment gateway adapters, a Payment Management UI, backend-for-frontend (BFF) services and an API message relay.",
+        ],
+      },
+      {
+        kind: "list",
+        eyebrow: "My Role",
+        title: "Technical owner and contributor",
+        description:
+          "I function as a technical owner/contributor for the ePayments platform, working across its services rather than inside a single screen or endpoint.",
+        items: [
+          "Own and contribute to multiple payment-processing services",
+          "Design payment orchestration and settlement flows",
+          "Build payment gateway adapters and webhook handling",
+          "Develop the Payment Management UI and its BFF layer",
+          "Work across event-driven architecture and cross-service state",
+          "Support production operations and security remediation",
+        ],
+      },
+      {
+        kind: "architecture",
+        eyebrow: "Platform Architecture",
+        title: "How the pieces fit together",
+        note: "Simplified representation — not an exact diagram of KEYLOOP infrastructure.",
+        nodes: [
+          {
+            id: "ui",
+            title: "Payment Management UI",
+            subtitle: "React · dealer-facing",
+          },
+          {
+            id: "bff",
+            title: "Payment Management BFF",
+            subtitle: "Backend-for-frontend",
+          },
+          {
+            id: "payment",
+            title: "Payment Service",
+            subtitle: "Transaction orchestration",
+          },
+          {
+            id: "bus",
+            title: "ADC / Event Bus",
+            subtitle: "CloudEvents · SNS/SQS",
+          },
+          {
+            id: "integration",
+            title: "PaymentsIntegrationHub",
+            subtitle: "Provider integration layer",
+          },
+          {
+            id: "comm",
+            title: "Communication Services",
+            subtitle: "SMS / Email PayByLink",
+          },
+          {
+            id: "providers",
+            title: "Gateway & Webhooks",
+            subtitle: "Payment providers · adapters",
+          },
+        ],
+        rows: [
+          ["ui"],
+          ["bff"],
+          ["payment"],
+          ["bus"],
+          ["integration", "comm"],
+          ["providers"],
+        ],
+        details: {
+          ui: {
+            title: "Payment Management UI",
+            body: "The React-based interface dealers use to manage payments. It renders the payment lifecycle and drives actions through the BFF — never touching the payment services directly.",
+          },
+          bff: {
+            title: "Payment Management BFF",
+            body: "A backend-for-frontend that shapes APIs for the UI, aggregating data from the payment services into screens the dealer team can act on.",
+          },
+          payment: {
+            title: "Payment Service",
+            body: "The core payment engine. It orchestrates a payment from request through communication, success and settlement, and owns the canonical payment state.",
+          },
+          bus: {
+            title: "ADC / Event Bus",
+            body: "An event bus (using CloudEvents over SNS/SQS) that carries payment events between services, keeping them decoupled and individually scalable.",
+          },
+          integration: {
+            title: "PaymentsIntegrationHub",
+            body: "The integration layer connecting the platform to payment providers. Standard webhook ingestion and event publishing make new providers pluggable.",
+          },
+          comm: {
+            title: "Communication Services",
+            body: "Services that send SMS and email PayByLink to customers and report delivery status back through webhooks so the payment lifecycle stays in sync.",
+          },
+          providers: {
+            title: "Gateway & Webhooks",
+            body: "Gateway adapters encode provider-specific differences. Webhooks stream provider results (paid, failed, settled) back for status synchronization.",
+          },
+        },
+      },
+      {
+        kind: "lifecycle",
+        eyebrow: "Payment Lifecycle",
+        title: "From request to settlement",
+        note: "Simplified representation of the payment lifecycle — not an exact specification of the internal system.",
+        steps: [
+          {
+            title: "Payment Requested",
+            detail:
+              "A payment request enters the platform through the UI, BFF or an external system, and a payment is created.",
+          },
+          {
+            title: "Awaiting Communication",
+            detail:
+              "The payment exists but communication has been dispatched and not yet delivered — an intermediate status that improves support visibility.",
+          },
+          {
+            title: "Communication Sent",
+            detail:
+              "An SMS or email PayByLink is delivered to the customer, and the communication provider reports delivery back.",
+          },
+          {
+            title: "Payment Successful",
+            detail:
+              "The customer completes payment, and the provider webhook synchronizes the status across services.",
+          },
+          {
+            title: "Settlement",
+            detail:
+              "Settlement is processed through the payment provider and reconciled back into the platform.",
+          },
+        ],
+      },
+      {
+        kind: "two-column",
+        eyebrow: "Technology",
+        title: "A distributed .NET and React stack on AWS",
+        description:
+          "The platform spans backend services, a frontend and cloud infrastructure — loosely coupled through events.",
+        columns: [
+          {
+            heading: "Backend & Events",
+            description: "Payment services and messaging.",
+            items: [
+              "C# / .NET services and REST APIs",
+              "DynamoDB for payment state",
+              "Event publishing with CloudEvents",
+              "SNS / SQS async messaging",
+              "Webhook ingestion and idempotency",
+            ],
+          },
+          {
+            heading: "Frontend & BFF",
+            description: "The dealer-facing interface.",
+            items: [
+              "React and JavaScript",
+              "Payment Management UI",
+              "Backend-for-frontend services",
+              "Jest and Cypress testing",
+            ],
+          },
+        ],
+      },
+      {
+        kind: "list",
+        eyebrow: "Cloud, Infrastructure & Operations",
+        title: "Run on AWS with Kubernetes",
+        description:
+          "The production platform is backed by AWS services and container workloads.",
+        items: [
+          "AWS Lambda, DynamoDB, SNS, SQS, S3 and ECS",
+          "Kubernetes / OneCD for deployment",
+          "ArgoCD awareness for GitOps-style delivery",
+          "New Relic for observability",
+          "Wiz and SonarQube for security and code quality",
+          "GitHub Actions for CI/CD and Postman for API work",
+        ],
+      },
+      {
+        kind: "list",
+        eyebrow: "Engineering Challenges",
+        title: "What makes this system hard",
+        description:
+          "Distributed payments come with constraints not present in a single-service application.",
+        items: [
+          "Keeping payment state consistent across services",
+          "Idempotent handling of redelivered events and webhooks",
+          "Supporting multiple payment providers with different behaviors",
+          "Asynchronous communication with clear visibility into status",
+          "Runtime validation of event processing in production",
+        ],
+      },
+      {
+        kind: "list",
+        eyebrow: "Production & Operations",
+        title: "Operating the platform carefully",
+        description:
+          "Payments are production-critical, so operations are treated as a first-class engineering concern.",
+        items: [
+          "Monitoring with New Relic across services",
+          "Security remediation on Lambda and container workloads",
+          "Webhook authentication hardening",
+          "Service decommissioning kept safe and deliberate",
+          "Testing strategy combining xUnit/NUnit, Jest and Cypress",
+        ],
+      },
+    ],
+  },
+  "ucp-sms-paybylink": contributionStudy(
+    "ucp-sms-paybylink",
+    contributions[0]!,
+  ),
+  "adapter-agnostic-settlement": contributionStudy(
+    "adapter-agnostic-settlement",
+    contributions[1]!,
+  ),
+  "paymentsintegrationhub-modernization": contributionStudy(
+    "paymentsintegrationhub-modernization",
+    contributions[2]!,
+  ),
   "tally-cis": {
     projectSlug: "tally-cis",
     title: "TALLY CIS",
     subtitle: "Enterprise SaaS Platform",
-    category: "Professional",
     disclaimer:
       "Anonymized architecture representation. This diagram describes the general shape of the system and is not an exact representation of proprietary company infrastructure.",
     blocks: [
@@ -15,7 +299,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         title: "A SaaS platform for energy retailers",
         paragraphs: [
           "TALLY CIS is a SaaS product — a web application that energy retailers use to run customer-facing operations. Customers interact with it as a modern web application while the platform handles data, business logic and integrations in cloud-hosted backend services.",
-          "I work across the full stack: building the React and TypeScript customer interface, developing .NET services, integrating systems through REST APIs, and working with Azure cloud services and microservice-based architecture.",
+          "I worked across the full stack: building the React and TypeScript customer interface, developing .NET services, integrating systems through REST APIs, and working with Azure cloud services and microservice-based architecture.",
         ],
       },
       {
@@ -23,7 +307,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         eyebrow: "My Role",
         title: "Frontend and backend, integrated end to end",
         description:
-          "My work spans the whole surface of the product — from the screen the user sees to the services and cloud platform behind it.",
+          "My work spanned the whole surface of the product — from the screen the user sees to the services and cloud platform behind it.",
         items: [
           "Maintained and extended the frontend application in React and TypeScript",
           "Developed and maintained backend services in C# / .NET",
@@ -42,8 +326,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         columns: [
           {
             heading: "Frontend",
-            description:
-              "The customer-facing React application, built with TypeScript.",
+            description: "The customer-facing React application, built with TypeScript.",
             items: [
               "React + TypeScript application development",
               "Reusable component architecture",
@@ -63,22 +346,6 @@ export const caseStudies: Record<string, CaseStudy> = {
               "Object-oriented design with SOLID principles",
             ],
           },
-        ],
-      },
-      {
-        kind: "list",
-        eyebrow: "Cloud Platform",
-        title: "Azure services in daily use",
-        description:
-          "Services, integration and delivery are all built around the Azure platform.",
-        items: [
-          "Azure Functions for serverless workloads",
-          "Azure Service Bus for messaging between services",
-          "Azure Web Apps for hosted services",
-          "Azure Key Vault for secrets and configuration",
-          "Azure DevOps for CI/CD and delivery",
-          "Docker for containerized workloads",
-          "Azure API Management for API exposure",
         ],
       },
       {
@@ -157,246 +424,9 @@ export const caseStudies: Record<string, CaseStudy> = {
           "API contracts agreed between producers and consumers",
           "API authorization enforced across systems",
           "Code reviews and pull requests for every change",
-          "Technical documentation on Confluence",
           "Unit and automated testing of critical paths",
           "Agile delivery with kickoffs and technical discussions",
         ],
-      },
-    ],
-  },
-  fastype: {
-    projectSlug: "fastype",
-    title: "Fastype",
-    subtitle: "Production-Style SaaS Application",
-    category: "Personal",
-    disclaimer:
-      "Personal project. Described at a design level — the engineering decisions and architecture, not a claim about features running in production.",
-    blocks: [
-      {
-        kind: "text",
-        eyebrow: "Overview",
-        title: "A SaaS application designed like a production system",
-        paragraphs: [
-          "Fastype is a personal project where I applied the same engineering discipline as production work: a React and TypeScript frontend, a .NET REST API, and a SQL Server database modeled with Entity Framework.",
-          "The point of the project is to demonstrate how a full-stack application is structured when you care about architecture — reusable components, clean API boundaries, validation, error handling and a considered data model — the way I would build software at work.",
-        ],
-      },
-      {
-        kind: "two-column",
-        eyebrow: "Architecture",
-        title: "A clean three-tier structure",
-        description:
-          "The system is split along the same lines I use in professional systems: presentation, API and data.",
-        columns: [
-          {
-            heading: "Frontend",
-            description: "React + TypeScript application.",
-            items: [
-              "Component architecture with reusable, typed components",
-              "Typed API client shared with the backend contracts",
-              "Form state and validation at the UI layer",
-              "Explicit loading, empty and error states",
-            ],
-          },
-          {
-            heading: "Backend",
-            description: ".NET REST API.",
-            items: [
-              "C# / .NET API with a clean separation of concerns",
-              "Entity Framework for data access",
-              "Input validation at the API boundary",
-              "Structured error responses for the client",
-            ],
-          },
-        ],
-      },
-      {
-        kind: "list",
-        eyebrow: "Authentication",
-        title: "Auth that matches how real SaaS works",
-        description:
-          "Protected routes and session state wired end to end — the same pattern demonstrated live in the React Engineering Lab.",
-        items: [
-          "Login flow with mocked credentials",
-          "Protected routes that redirect unauthenticated users",
-          "Session state shared across the application",
-          "Logout that clears state and returns to the login screen",
-        ],
-      },
-      {
-        kind: "list",
-        eyebrow: "Data Model",
-        title: "A database designed around the domain",
-        description:
-          "Relational modeling with Entity Framework and SQL Server, with relationships that mirror the API resources.",
-        items: [
-          "Entities mapped with Entity Framework",
-          "Relational constraints and keys at the database level",
-          "LINQ queries for data access",
-          "Migrations for schema evolution",
-        ],
-      },
-      {
-        kind: "list",
-        eyebrow: "Quality",
-        title: "Validation, errors and deployment",
-        description:
-          "Production concerns handled deliberately rather than as afterthoughts.",
-        items: [
-          "Validation on both the UI and the API boundary",
-          "Consistent error handling and user-facing messages",
-          "Structured logging for debugging",
-          "Deployment considerations captured in the project README",
-        ],
-      },
-    ],
-  },
-  "event-driven-platform": {
-    projectSlug: "event-driven-platform",
-    title: "Event-Driven Platform",
-    subtitle: "Distributed Systems Architecture Lab",
-    category: "Personal",
-    disclaimer:
-      "Personal demonstration project. Built to explore distributed systems patterns — it is not connected to any company's production systems.",
-    blocks: [
-      {
-        kind: "text",
-        eyebrow: "Overview",
-        title: "An order-processing platform built on events",
-        paragraphs: [
-          "This is my architecture lab for structured outbox over distributed systems. It's an order-processing platform: a React dashboard submits orders to a .NET API, which publishes events to RabbitMQ. Dedicated services consume those events, coordinate payment and fulfillment, and persist state to SQL Server.",
-          "The system exists to explore the decisions that come up when a monolith splits into services — how messages flow, where state lives, how failures are handled, and how you keep a distributed system honest.",
-        ],
-      },
-      {
-        kind: "architecture",
-        eyebrow: "Architecture",
-        title: "From HTTP request to event-driven flow",
-        note: "Each node is described in the diagram below. The full flow still runs as a browser-based simulation so it's demonstrable without a deployed stack.",
-        nodes: [
-          {
-            id: "dashboard",
-            title: "React Dashboard",
-            subtitle: "Thin client, no business logic",
-          },
-          {
-            id: "api",
-            title: ".NET API",
-            subtitle: "Validates, persists, publishes",
-          },
-          {
-            id: "broker",
-            title: "RabbitMQ",
-            subtitle: "Message broker / event bus",
-          },
-          {
-            id: "order",
-            title: "Order Service",
-            subtitle: "Consumes events · own data store",
-          },
-          {
-            id: "payment",
-            title: "Payment Service",
-            subtitle: "Idempotent consumers",
-          },
-          {
-            id: "notification",
-            title: "Notification Service",
-            subtitle: "Side-effect consumer",
-          },
-          {
-            id: "db",
-            title: "SQL Server",
-            subtitle: "Per-service persistence",
-          },
-        ],
-        rows: [
-          ["dashboard"],
-          ["api"],
-          ["broker"],
-          ["order", "payment"],
-          ["notification"],
-          ["db"],
-        ],
-        details: {
-          dashboard: {
-            title: "React Dashboard",
-            body: "Client-side only: renders state fed by the API. In the browser simulation it acts as a thin client over the event flow.",
-          },
-          api: {
-            title: ".NET API",
-            body: "The entry point. Validates the request, persists the order, and publishes an OrderCreated event to the broker so the caller doesn't wait for downstream work.",
-          },
-          broker: {
-            title: "RabbitMQ",
-            body: "The message backbone. Producers publish and consumers subscribe, so services never call each other directly and stay decoupled.",
-          },
-          order: {
-            title: "Order Service",
-            body: "Consumes OrderCreated, applies order processing logic, owns its slice of the data and emits follow-up events.",
-          },
-          payment: {
-            title: "Payment Service",
-            body: "Processes payment events with idempotency — a redelivered event must not double-charge.",
-          },
-          notification: {
-            title: "Notification Service",
-            body: "A side-effect consumer: triggers notifications when order state changes. Interchangeable with any number of consumers.",
-          },
-          db: {
-            title: "SQL Server",
-            body: "Per-service persistence, each service owning its own tables so services remain independently evolvable.",
-          },
-        },
-      },
-      {
-        kind: "two-column",
-        eyebrow: "Design",
-        title: "Service boundaries and messaging",
-        description:
-          "The interesting decisions in this system are about where services split and how they communicate.",
-        columns: [
-          {
-            heading: "Service Boundaries",
-            description: "Each service owns a capability.",
-            items: [
-              "Order, payment and notification services own distinct slices of the domain",
-              "Each service owns its data — no shared database",
-              "Public contracts published as message types",
-              "Failure in one service doesn't take down the others",
-            ],
-          },
-          {
-            heading: "Messaging",
-            description: "RabbitMQ as the event bus.",
-            items: [
-              "Producers publish, consumers subscribe — no direct calls",
-              "Async processing: the API returns without waiting for downstream work",
-              "Consumers retry transient failures",
-              "Dead-lettering for messages that keep failing",
-            ],
-          },
-        ],
-      },
-      {
-        kind: "list",
-        eyebrow: "Reliability",
-        title: "Idempotency, retries and error handling",
-        description:
-          "Distributed systems fail in messy ways — the design accounts for that.",
-        items: [
-          "Idempotent consumers so redelivered messages are safe to process twice",
-          "Retry policies for transient failures",
-          "Explicit error handling and dead-letter flows",
-          "Structured logging across all services",
-          "Containerized with Docker Compose for a consistent local environment",
-        ],
-      },
-      {
-        kind: "callout",
-        tone: "warning",
-        title: "A learning project, not a company system",
-        body: "This platform is deliberately small and explicitly a personal demonstration. It's a place to reason about distributed systems trade-offs — microservices, messaging, idempotency and retries — without pretending to be an industrial system.",
       },
     ],
   },
@@ -404,7 +434,6 @@ export const caseStudies: Record<string, CaseStudy> = {
     projectSlug: "enterprise-retail",
     title: "Enterprise Retail Platform",
     subtitle: "Professional Experience — Anonymized",
-    category: "Professional",
     disclaimer:
       "Professional experience described at a sanitized level. No proprietary source code, confidential internals or customer data are included.",
     blocks: [
@@ -413,7 +442,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         eyebrow: "Overview",
         title: "Enterprise retail software at NCR Corporation",
         paragraphs: [
-          "At NCR Corporation, I worked as Software Engineer I on Emerald, an enterprise retail product used in production retail environments. The work was a mix of API design, UI development, reliability engineering and testing inside a large, long-lived codebase.",
+          "At NCR Corporation, I worked as Software Engineer I on an enterprise retail product used in production retail environments. The work was a mix of API design, UI development, reliability engineering and testing inside a large, long-lived codebase.",
           "This case study is intentionally anonymized: the goal is to show the kind of engineering involved, not to expose a proprietary system's internals.",
         ],
       },
@@ -478,7 +507,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         kind: "callout",
         tone: "info",
         title: "Anonymized professional experience",
-        body: "All details about Emerald are described generically. No proprietary code, architecture specifics, client information or internal identifiers are included — and none should be inferred from this page.",
+        body: "All details about this role are described generically. No proprietary code, architecture specifics, client information or internal identifiers are included — and none should be inferred from this page.",
       },
     ],
   },

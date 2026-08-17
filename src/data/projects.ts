@@ -2,67 +2,70 @@ import type { Project } from "../types";
 
 export const projects: Project[] = [
   {
+    slug: "keyloop-epayments-platform",
+    order: "01",
+    title: "Keyloop ePayments Platform",
+    company: "Keyloop",
+    tagline: "Distributed payment platform for automotive retail",
+    timeframe: "Current",
+    summary:
+      "A distributed system of 6+ payment-processing microservices covering transaction orchestration, settlement processing, customer communication and payment-provider integrations.",
+    technologies: ["React", "TypeScript", ".NET", "AWS", "Event-Driven", "Kubernetes"],
+  },
+  {
+    slug: "ucp-sms-paybylink",
+    order: "02",
+    title: "UCP SMS PayByLink",
+    company: "Keyloop",
+    tagline: "New payment-link delivery channel",
+    timeframe: "Keyloop",
+    summary:
+      "End-to-end SMS integration — phone number capture, event publishing, URL shortening, delivery webhooks and payment status synchronization — spanning 12+ stories across 5 services.",
+    technologies: ["C#", ".NET", "AWS", "SNS/SQS", "Webhooks"],
+  },
+  {
+    slug: "adapter-agnostic-settlement",
+    order: "03",
+    title: "Adapter-Agnostic Settlement Processing",
+    company: "Keyloop",
+    tagline: "Settlement decoupled from a single provider",
+    timeframe: "Keyloop",
+    summary:
+      "Designed an adapter-agnostic settlement architecture with standardized webhook ingestion and event publishing, creating a reusable pattern for future payment providers.",
+    technologies: ["C#", ".NET", "Event-Driven", "AWS"],
+  },
+  {
+    slug: "paymentsintegrationhub-modernization",
+    order: "04",
+    title: "PaymentsIntegrationHub Modernization",
+    company: "Keyloop",
+    tagline: "From background dispatch to controller-based processing",
+    timeframe: "Keyloop",
+    summary:
+      "Reworked event processing toward controller-based handling with centralized handler registration and runtime validation — earlier validation, more reliable processing, better testability.",
+    technologies: ["C#", ".NET", "SNS/SQS", "AWS"],
+  },
+  {
     slug: "tally-cis",
+    order: "05",
     title: "TALLY CIS",
-    shortTitle: "TALLY CIS",
-    tagline: "Enterprise SaaS Platform",
-    category: "Professional",
-    timeframe: "Nov 2023 – Present",
-    cardDescription:
-      "Enterprise SaaS platform for energy retailers, where I worked across frontend and backend development, REST API integration, cloud services and microservice-based architecture.",
-    technologies: [
-      "React",
-      "TypeScript",
-      ".NET",
-      "Azure",
-      "Docker",
-      "Microservices",
-      "SQL Server",
-    ],
-    featured: true,
-  },
-  {
-    slug: "fastype",
-    title: "Fastype",
-    shortTitle: "Fastype",
-    tagline: "Production-Style SaaS Application",
-    category: "Personal",
-    timeframe: "Personal project",
-    cardDescription:
-      "A production-style SaaS application built with React, TypeScript and .NET — demonstrating frontend architecture, reusable components, authentication, REST API design and database modeling.",
-    technologies: [
-      "React",
-      "TypeScript",
-      ".NET",
-      "REST APIs",
-      "Entity Framework",
-      "SQL Server",
-    ],
-    featured: false,
-  },
-  {
-    slug: "event-driven-platform",
-    title: "Event-Driven Platform",
-    shortTitle: "Event-Driven Platform",
-    tagline: "Distributed Systems Architecture Lab",
-    category: "Personal",
-    timeframe: "Personal project",
-    cardDescription:
-      "An order-processing platform built around microservices, RabbitMQ message brokers, Docker and SQL Server — exploring service boundaries, idempotency, retries and event-driven architecture.",
-    technologies: ["React", "TypeScript", ".NET", "RabbitMQ", "Docker", "SQL Server"],
-    featured: false,
+    company: "Tally Group",
+    tagline: "Enterprise SaaS for energy retailers",
+    timeframe: "Nov 2023 – Jul 2025",
+    summary:
+      "A SaaS platform for energy retailers where I worked across frontend (React, TypeScript), backend (.NET, REST APIs), microservices, messaging and Azure cloud services.",
+    technologies: ["React", "TypeScript", ".NET", "Azure", "RabbitMQ", "Docker"],
   },
   {
     slug: "enterprise-retail",
-    title: "Enterprise Retail Platform",
-    shortTitle: "Enterprise Retail",
-    tagline: "Professional Experience — Anonymized",
-    category: "Professional",
+    order: "06",
+    title: "Enterprise Retail Platform — NCR",
+    company: "NCR Corporation",
+    tagline: "Enterprise retail software",
     timeframe: "Mar 2021 – Nov 2023",
-    cardDescription:
-      "Enterprise retail software at NCR Corporation, where I contributed to APIs, UI development, reliability, automated tests and feature delivery across a C#/.NET, React and WPF stack.",
-    technologies: ["C#", ".NET", "React", "WPF", "SQL Server", "Testing"],
-    featured: false,
+    summary:
+      "API development, React UI, reliability engineering and automated testing inside a mature enterprise retail codebase on C#/.NET, React and WPF.",
+    technologies: ["C#", ".NET", "React", "WPF", "SQL Server"],
   },
 ];
 

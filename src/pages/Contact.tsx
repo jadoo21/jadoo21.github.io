@@ -57,8 +57,8 @@ export default function Contact() {
                 <h2 className="text-base font-semibold text-zinc-900 dark:text-white">
                   LinkedIn
                 </h2>
-                <p className="mt-1 font-mono text-sm text-zinc-600 group-hover:text-brand-700 dark:text-zinc-400 dark:group-hover:text-brand-300">
-                  linkedin.c../rishabh-roshan
+                <p className="mt-1 font-mono text-sm break-all text-zinc-600 group-hover:text-brand-700 dark:text-zinc-400 dark:group-hover:text-brand-300">
+                  linkedin.com/in/rishabh-roshan
                 </p>
               </div>
             </a>

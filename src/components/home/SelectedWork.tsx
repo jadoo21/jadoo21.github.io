@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { projects } from "../../data/projects";
-import { ProjectCard } from "../projects/ProjectCard";
+import { WorkItem } from "../projects/WorkItem";
 import { Container } from "../layout/Container";
 import { Section } from "../layout/Section";
 import { SectionHeader } from "../layout/SectionHeader";
@@ -9,18 +9,21 @@ import { Reveal } from "../ui/Reveal";
 
 export function SelectedWork() {
   return (
-    <Section ariaLabel="Selected engineering work" className="py-20 sm:py-24">
+    <Section
+      ariaLabel="Selected engineering work"
+      className="border-t border-zinc-200 py-20 sm:py-24 dark:border-zinc-800"
+    >
       <Container>
         <SectionHeader
-          eyebrow="Engineering Work"
-          title="Selected Engineering Work"
-          description="Real work on enterprise systems, plus personal projects where I explore architecture and engineering practice."
+          eyebrow="Work"
+          title="Selected Work"
+          description="Real engineering on enterprise systems — from distributed payment platforms to enterprise SaaS."
         />
 
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="space-y-4">
           {projects.map((project, index) => (
-            <Reveal key={project.slug} delay={index * 0.05} className="h-full">
-              <ProjectCard project={project} />
+            <Reveal key={project.slug} delay={index * 0.03}>
+              <WorkItem project={project} />
             </Reveal>
           ))}
         </div>
