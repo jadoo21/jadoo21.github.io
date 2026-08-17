@@ -1,9 +1,7 @@
 import { Briefcase, Check, MapPin } from "lucide-react";
 import type { ExperienceItem } from "../../types";
-import { slugForName } from "../../data/technologies";
 import { Reveal } from "../ui/Reveal";
 import { Tag } from "../ui/Tag";
-import { TechBadgeBySlug } from "../technology/TechBadge";
 
 interface CompanyBlockProps {
   item: ExperienceItem;
@@ -48,23 +46,13 @@ export function CompanyBlock({ item, index }: CompanyBlockProps) {
           ))}
         </ul>
 
-        <div className="mt-5 flex flex-wrap gap-2">
-          {item.technologies.map((tech) => {
-            const slug = slugForName(tech);
-            if (slug) {
-              return (
-                <span key={tech}>
-                  <TechBadgeBySlug slug={slug} className="flex" />
-                </span>
-              );
-            }
-            return (
-              <span key={tech}>
-                <Tag>{tech}</Tag>
-              </span>
-            );
-          })}
-        </div>
+        <ul className="mt-5 flex flex-wrap gap-2">
+          {item.technologies.map((tech) => (
+            <li key={tech}>
+              <Tag>{tech}</Tag>
+            </li>
+          ))}
+        </ul>
       </article>
     </Reveal>
   );

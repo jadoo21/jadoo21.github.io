@@ -1,5 +1,3 @@
-import { ArrowRight, Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
 import { Container } from "../components/layout/Container";
 import { Cta } from "../components/layout/Cta";
 import { PageHeader } from "../components/layout/PageHeader";
@@ -80,65 +78,32 @@ export default function About() {
               <h2 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-white">
                 Career progression
               </h2>
-              <ol className="flex flex-1 flex-col justify-center gap-3">
+              <ol className="flex flex-1 flex-col justify-center gap-5">
                 {progression.map((step, index) => (
-                  <li key={step.label}>
-                    <div className="flex items-center gap-3">
-                      <span className="font-mono text-2xs text-zinc-400">
-                        0{index + 1}
-                      </span>
-                      <div>
-                        <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-                          {step.label}
-                        </p>
-                        <p className="font-mono text-2xs text-zinc-500 dark:text-zinc-500">
-                          {step.note}
-                        </p>
-                      </div>
-                    </div>
+                  <li key={step.label} className="relative flex items-start gap-3">
                     {index < progression.length - 1 ? (
-                      <span aria-hidden="true" className="ml-[7px] text-zinc-300 dark:text-zinc-700">
-                        ↓
-                      </span>
+                      <span
+                        aria-hidden="true"
+                        className="absolute bottom-[-1.25rem] left-[13px] top-[14px] w-px bg-zinc-200 dark:bg-zinc-700"
+                      />
                     ) : null}
+                    <span className="z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-200 bg-brand-50 font-mono text-2xs font-semibold text-brand-600 dark:border-brand-900 dark:bg-brand-950 dark:text-brand-400">
+                      0{index + 1}
+                    </span>
+                    <div className="pt-1">
+                      <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                        {step.label}
+                      </p>
+                      <p className="font-mono text-2xs text-zinc-500 dark:text-zinc-500">
+                        {step.note}
+                      </p>
+                    </div>
                   </li>
                 ))}
               </ol>
             </div>
           </Reveal>
         </div>
-
-        <Reveal>
-          <section
-            aria-label="AI-assisted engineering"
-            className="card-surface mb-20 flex flex-col gap-5 border-l-4 border-l-brand-500 p-7 sm:p-8"
-          >
-            <div className="flex items-start gap-3">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-950 dark:text-brand-400">
-                <Sparkles className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <div>
-                <h2 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-white">
-                  Exploring AI-Augmented Engineering
-                </h2>
-                <p className="mt-2 max-w-prose text-[15px] leading-relaxed text-zinc-600 dark:text-zinc-400">
-                  Alongside the core stack, I explore how AI-assisted development and
-                  developer tooling change the way software gets built — including
-                  Claude Code and MCP-based tooling and runbooks. It&apos;s one tool in
-                  the belt, not a replacement for engineering judgment: I use it to move
-                  faster on the kind of systems described on this site.
-                </p>
-                <Link
-                  to="/work"
-                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300"
-                >
-                  See the engineering
-                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-                </Link>
-              </div>
-            </div>
-          </section>
-        </Reveal>
       </Container>
       <Cta />
     </>

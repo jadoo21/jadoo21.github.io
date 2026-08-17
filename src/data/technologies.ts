@@ -44,6 +44,8 @@ export const techCatalog: Record<string, TechEntry> = {
   jest: { slug: "jest", name: "Jest", category: "Testing & Quality", logo: true },
   cypress: { slug: "cypress", name: "Cypress", category: "Testing & Quality", logo: true },
   sonarqube: { slug: "sonarqube", name: "SonarQube", category: "Testing & Quality", logo: true },
+  github: { slug: "github", name: "GitHub", category: "Developer Tooling", logo: true },
+  newrelic: { slug: "newrelic", name: "New Relic", category: "Production Engineering", logo: true },
 };
 
 /** Compact logo row used in the hero. No Azure — that belongs to Tally Group's experience. */
@@ -75,6 +77,11 @@ export const stackGroups: StackGroup[] = [
     id: "testing",
     title: "Testing & Quality",
     items: ["jest", "cypress", "sonarqube"],
+  },
+  {
+    id: "tooling",
+    title: "Developer Tooling",
+    items: ["github"],
   },
 ];
 
@@ -121,9 +128,9 @@ export const specializations: Specialization[] = [
     lines: [
       "AWS · Docker · Kubernetes",
       "SonarQube and automated testing",
-      "Observability",
+      "Observability · New Relic",
       "80%+ test coverage",
     ],
-    technologies: ["aws", "docker", "kubernetes", "sonarqube"],
+    technologies: ["aws", "docker", "kubernetes", "sonarqube", "newrelic"],
   },
 ];
