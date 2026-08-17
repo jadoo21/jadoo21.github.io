@@ -14,16 +14,30 @@ function namespaceIds(body: string, uid: string): string {
     .replace(/url\(#([^)]+)\)/g, (_, id: string) => `url(#${uid}-${id})`);
 }
 
+function aspectSize(viewBox: string, box: number): { width: number; height: number } {
+  const parts = viewBox.split(/\s+/).map(Number);
+  const width = parts[2] ?? 256;
+  const height = parts[3] ?? 256;
+  const aspect = width / height;
+  if (aspect >= 1) {
+    return { width: box, height: box / aspect };
+  }
+  return { width: box * aspect, height: box };
+}
+
 export function TechMark({ slug, label, className }: TechMarkProps) {
   const uid = useId().replace(/[^a-zA-Z0-9]/g, "");
   const source = logoBodies[slug];
   if (!source) return null;
+
+  const size = aspectSize(source.viewBox, 20);
 
   return (
     <svg
       viewBox={source.viewBox}
       role="img"
       aria-label={`${label} logo`}
+      style={size}
       className={cn("shrink-0", className)}
       dangerouslySetInnerHTML={{ __html: namespaceIds(source.body, uid) }}
     />
@@ -47,7 +61,7 @@ export function TechLogo({ name, slug, hasLogo, className }: TechLogoProps) {
   if (hasLogo && logoBodies[slug]) {
     return (
       <span className={cn("flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-white ring-1 ring-zinc-200 dark:ring-zinc-700", className)}>
-        <TechMark slug={slug} label={name} className="h-4 w-4" />
+        <TechMark slug={slug} label={name} />
       </span>
     );
   }

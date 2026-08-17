@@ -16,11 +16,11 @@ export const timeline: TimelineEntry[] = [
     period: "Jul 2025 – Present",
     current: true,
     summary:
-      "Technical owner/contributor for Keyloop ePayments — a distributed payment platform for automotive dealerships spanning payment orchestration, settlement and communication services.",
+      "Full-stack engineer on ePayments — a distributed payment platform for automotive dealerships built with React, .NET and AWS.",
   },
   {
     company: "Tally Group",
-    role: "Developer",
+    role: "Software Developer",
     location: "Hyderabad, India",
     period: "Nov 2023 – Jul 2025",
     current: false,
@@ -34,6 +34,6 @@ export const timeline: TimelineEntry[] = [
     period: "Mar 2021 – Nov 2023",
     current: false,
     summary:
-      "Built and maintained features for an enterprise retail platform — API development, React UI, testing and reliability on a C#/.NET stack.",
+      "Worked on Emerald, an enterprise retail platform — backend services, React UI, APIs, testing and reliability on a C#/.NET stack.",
   },
 ];

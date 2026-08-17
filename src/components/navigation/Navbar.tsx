@@ -12,6 +12,7 @@ const navLinks = [
   { to: "/experience", label: "Experience" },
   { to: "/work", label: "Work" },
   { to: "/about", label: "About" },
+  { to: "/contact", label: "Contact" },
 ];
 
 function NavLinkItem({ to, label }: { to: string; label: string }) {
@@ -103,7 +104,7 @@ export function Navbar() {
           </a>
           <Button
             href={siteConfig.resumeUrl}
-            target="_blank"
+            download
             size="sm"
             className="ml-2"
           >
@@ -225,6 +226,15 @@ export function Navbar() {
 
               <div className="mt-auto flex flex-col gap-2.5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
                 <Button to="/contact">Get in Touch</Button>
+                <Button
+                  href={siteConfig.resumeUrl}
+                  variant="secondary"
+                  download
+                  aria-label="Download resume"
+                >
+                  <Download className="h-4 w-4" aria-hidden="true" />
+                  Resume
+                </Button>
                 <div className="flex gap-2.5">
                   <Button
                     href={siteConfig.linkedin}

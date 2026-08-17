@@ -82,7 +82,7 @@ export function Hero() {
               <Button to="/work" size="lg" variant="secondary">
                 View Work
               </Button>
-              <Button href={siteConfig.resumeUrl} size="lg" variant="secondary">
+              <Button href={siteConfig.resumeUrl} size="lg" variant="secondary" download>
                 <Download className="h-4 w-4" aria-hidden="true" />
                 Download Resume
               </Button>

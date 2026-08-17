@@ -4,7 +4,6 @@ import { Layout } from "./components/layout/Layout";
 
 const Home = lazy(() => import("./pages/Home"));
 const Work = lazy(() => import("./pages/Work"));
-const CaseStudyPage = lazy(() => import("./pages/CaseStudyPage"));
 const Experience = lazy(() => import("./pages/Experience"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -25,7 +24,6 @@ export default function App() {
         <Route element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/work" element={<Work />} />
-          <Route path="/work/:slug" element={<CaseStudyPage />} />
           <Route path="/experience" element={<Experience />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />

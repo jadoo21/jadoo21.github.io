@@ -7,7 +7,7 @@ describe("Navbar", () => {
   it("renders the RR brand mark and primary navigation links", () => {
     renderWithRouter(<Navbar />);
     expect(screen.getByRole("link", { name: /Rishabh Roshan/ })).toBeInTheDocument();
-    for (const label of ["Experience", "Work", "About"]) {
+    for (const label of ["Experience", "Work", "About", "Contact"]) {
       expect(screen.getByRole("link", { name: label })).toBeInTheDocument();
     }
   });

@@ -17,12 +17,11 @@ export function Cta() {
           <div className="card-surface flex flex-col items-start gap-8 p-8 sm:p-12">
             <div>
               <h2 className="text-balance text-2xl font-semibold tracking-tight text-zinc-900 sm:text-3xl dark:text-white">
-                Building something interesting? Let&apos;s talk.
+                Let&apos;s Connect
               </h2>
               <p className="mt-3 max-w-prose text-sm leading-relaxed text-zinc-600 sm:text-[15px] dark:text-zinc-400">
-                If you&apos;re working on a product that needs solid engineering across
-                the stack — or you&apos;re hiring someone who thinks in systems —
-                I&apos;d be glad to hear about it.
+                I&apos;m open to conversations about software engineering,
+                full-stack development and interesting technical problems.
               </p>
             </div>
 

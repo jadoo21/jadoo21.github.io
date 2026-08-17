@@ -1,8 +1,6 @@
-import { projects } from "../data/projects";
-import { WorkItem } from "../components/projects/WorkItem";
 import { Container } from "../components/layout/Container";
-import { PageHeader } from "../components/layout/PageHeader";
 import { Cta } from "../components/layout/Cta";
+import { PageHeader } from "../components/layout/PageHeader";
 import { Reveal } from "../components/ui/Reveal";
 import { formatPageMeta, usePageMeta } from "../hooks/usePageMeta";
 
@@ -10,7 +8,7 @@ export default function Work() {
   usePageMeta({
     title: formatPageMeta("Work"),
     description:
-      "Selected professional engineering work — the Keyloop ePayments platform, payment contributions, TALLY CIS and enterprise retail at NCR.",
+      "Selected personal projects and technical explorations by Rishabh Roshan, a full-stack software engineer.",
   });
 
   return (
@@ -18,17 +16,22 @@ export default function Work() {
       <Container>
         <PageHeader
           eyebrow="Work"
-          title="Selected Work"
-          description="Professional engineering work on distributed payment systems, enterprise SaaS and enterprise retail — each with a closer look at the problem, the approach and the impact."
+          title="Work"
+          description="Selected personal projects and technical explorations will appear here."
         />
 
-        <div className="space-y-4 pb-20 sm:pb-24">
-          {projects.map((project, index) => (
-            <Reveal key={project.slug} delay={index * 0.03}>
-              <WorkItem project={project} />
-            </Reveal>
-          ))}
-        </div>
+        <Reveal>
+          <div className="card-surface mb-20 flex flex-col items-start gap-3 p-8 sm:p-12">
+            <h2 className="text-balance text-xl font-semibold tracking-tight text-zinc-900 sm:text-2xl dark:text-white">
+              Coming soon.
+            </h2>
+            <p className="max-w-prose text-[15px] leading-relaxed text-zinc-600 dark:text-zinc-400">
+              I&apos;m focused on shipping production software right now. Personal
+              projects, technical write-ups and side explorations will be shared
+              here as they take shape.
+            </p>
+          </div>
+        </Reveal>
       </Container>
       <Cta />
     </>

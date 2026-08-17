@@ -5,6 +5,7 @@ import { Container } from "../components/layout/Container";
 import { Cta } from "../components/layout/Cta";
 import { PageHeader } from "../components/layout/PageHeader";
 import { experience } from "../data/experience";
+import { yearsExperience } from "../data/site";
 import { formatPageMeta, usePageMeta } from "../hooks/usePageMeta";
 
 export default function Experience() {
@@ -22,7 +23,7 @@ export default function Experience() {
         <PageHeader
           eyebrow="Career"
           title="Experience"
-          description="From enterprise retail to distributed payments — the roles, systems and engineering behind five-plus years across the stack."
+          description={`From enterprise retail to distributed payments — the roles, systems and engineering behind ${yearsExperience()} years across the stack.`}
         />
 
         <CareerTimeline />

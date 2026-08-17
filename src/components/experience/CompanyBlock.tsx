@@ -1,5 +1,4 @@
-import { ArrowUpRight, Briefcase, Check, MapPin } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Briefcase, Check, MapPin } from "lucide-react";
 import type { ExperienceItem } from "../../types";
 import { slugForName } from "../../data/technologies";
 import { Reveal } from "../ui/Reveal";
@@ -66,14 +65,6 @@ export function CompanyBlock({ item, index }: CompanyBlockProps) {
             );
           })}
         </div>
-
-        <Link
-          to={`/work/${item.projectSlug}`}
-          className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300"
-        >
-          {item.project} case study
-          <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-        </Link>
       </article>
     </Reveal>
   );

@@ -2,9 +2,8 @@ import { stackGroups, techCatalog } from "../../data/technologies";
 import { Container } from "../layout/Container";
 import { Section } from "../layout/Section";
 import { SectionHeader } from "../layout/SectionHeader";
-import { TechBadgeBySlug } from "../technology/TechBadge";
+import { TechLogo } from "../technology/TechLogo";
 import { Reveal } from "../ui/Reveal";
-import { cn } from "../../lib/cn";
 
 export function TechStack() {
   return (
@@ -16,28 +15,35 @@ export function TechStack() {
         <SectionHeader
           eyebrow="Stack"
           title="Technology Stack"
-          description="The tools I use across frontend, backend, cloud and production engineering — no invented proficiency scores, just what I work with."
+          description="The tools I work with across frontend, backend, cloud and quality — limited to technologies with a clean, recognizable logo."
         />
-        <dl className="grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="space-y-10">
           {stackGroups.map((group, groupIndex) => (
             <Reveal key={group.id} delay={groupIndex * 0.04}>
               <div>
-                <dt className="font-mono text-2xs uppercase tracking-wider text-zinc-500 dark:text-zinc-500">
+                <h3 className="font-mono text-2xs uppercase tracking-wider text-zinc-500 dark:text-zinc-500">
                   {group.title}
-                </dt>
-                <dd className="mt-3">
-                  <ul className="flex flex-wrap gap-2">
-                    {group.items.map((slug) => (
-                      <li key={slug} className={cn(!techCatalog[slug]?.logo && "pt-2")}>
-                        <TechBadgeBySlug slug={slug} className="flex" />
+                </h3>
+                <ul className="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
+                  {group.items.map((slug) => {
+                    const entry = techCatalog[slug];
+                    if (!entry) return null;
+                    return (
+                      <li key={slug}>
+                        <div className="flex h-full items-center gap-2.5 rounded-xl border border-zinc-200 bg-white px-3 py-2.5 dark:border-zinc-800 dark:bg-zinc-900">
+                          <TechLogo name={entry.name} slug={entry.slug} hasLogo={entry.logo} />
+                          <span className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
+                            {entry.name}
+                          </span>
+                        </div>
                       </li>
-                    ))}
-                  </ul>
-                </dd>
+                    );
+                  })}
+                </ul>
               </div>
             </Reveal>
           ))}
-        </dl>
+        </div>
       </Container>
     </Section>
   );

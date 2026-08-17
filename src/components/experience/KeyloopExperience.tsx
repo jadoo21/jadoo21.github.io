@@ -1,11 +1,14 @@
 import { Check, MapPin } from "lucide-react";
-import { Link } from "react-router-dom";
-import { keyloopRole, whatIWorkOn } from "../../data/keyloop";
+import {
+  howWeDeliver,
+  keyloopRole,
+  paymentProviders,
+  whatIWorkOn,
+} from "../../data/keyloop";
 import { experience } from "../../data/experience";
 import { SectionHeader } from "../layout/SectionHeader";
-import { Contributions } from "./Contributions";
-import { OwnershipGrid } from "./OwnershipGrid";
 import { TechnicalFocus } from "./TechnicalFocus";
+import { Tag } from "../ui/Tag";
 
 export function KeyloopExperience() {
   const keyloop = experience.find((item) => item.company === "Keyloop");
@@ -13,9 +16,9 @@ export function KeyloopExperience() {
   return (
     <div className="rounded-2xl border border-zinc-200 p-6 sm:p-10 dark:border-zinc-800">
       <SectionHeader
-        eyebrow="Keyloop India · Engineering Applications — Team Fortis"
-        title="ePayments Platform"
-        description="A distributed system of 6+ payment-processing microservices. I function as a technical owner and contributor across the platform."
+        eyebrow="Keyloop · Current Role"
+        title="Keyloop ePayments"
+        description="Payment technology for automotive dealerships — a distributed platform for payment processing, provider integrations and dealer-facing tools."
         action={
           <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-2xs font-medium text-brand-700 dark:border-brand-900 dark:bg-brand-950 dark:text-brand-300">
             {keyloopRole} · Current
@@ -24,33 +27,30 @@ export function KeyloopExperience() {
       />
 
       {keyloop ? (
-        <div className="mb-10 flex flex-col gap-2 border-b border-zinc-100 pb-10 dark:border-zinc-800">
-          <p className="text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
-            {keyloop.summary}
-          </p>
-          <Link
-            to="/work/keyloop-epayments-platform"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300"
-          >
-            ePayments platform case study
-          </Link>
-        </div>
+        <p className="mb-10 max-w-prose text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
+          {keyloop.summary}
+        </p>
       ) : null}
 
       <section aria-label="What I work on" className="mt-8">
         <h3 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-white">
           What I Work On
         </h3>
-        <ul className="mt-5 grid max-w-4xl gap-x-8 gap-y-2.5 sm:grid-cols-2">
+        <ul className="mt-5 grid max-w-4xl gap-x-8 gap-y-5 sm:grid-cols-2">
           {whatIWorkOn.map((item) => (
-            <li key={item} className="flex items-start gap-2.5 text-sm leading-relaxed">
+            <li key={item.title} className="flex items-start gap-2.5 text-sm leading-relaxed">
               <span
                 aria-hidden="true"
                 className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-brand-50 dark:bg-brand-950"
               >
                 <Check className="h-3 w-3 text-brand-600 dark:text-brand-400" />
               </span>
-              <span className="text-zinc-700 dark:text-zinc-300">{item}</span>
+              <span className="text-zinc-700 dark:text-zinc-300">
+                <span className="font-medium">{item.title}</span>
+                <span className="mt-0.5 block text-zinc-600 dark:text-zinc-400">
+                  {item.detail}
+                </span>
+              </span>
             </li>
           ))}
         </ul>
@@ -60,9 +60,42 @@ export function KeyloopExperience() {
         </p>
       </section>
 
-      <OwnershipGrid />
-      <Contributions />
+      <section aria-label="Payment integrations" className="mt-12">
+        <h3 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-white">
+          Payment Integrations
+        </h3>
+        <p className="mt-2 max-w-prose text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+          Experience integrating payment-provider workflows across the ePayments
+          platform, including:
+        </p>
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {paymentProviders.map((provider) => (
+            <li key={provider}>
+              <Tag className="px-2.5 py-1 text-2xs">{provider}</Tag>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <TechnicalFocus />
+
+      <section aria-label="How we deliver" className="mt-12">
+        <h3 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-white">
+          How We Deliver
+        </h3>
+        <p className="mt-2 max-w-prose text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+          Working within a SAFe Agile environment with PI Planning and
+          sprint-based delivery, collaborating across engineering and product
+          teams from planning through production.
+        </p>
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {howWeDeliver.map((item) => (
+            <li key={item}>
+              <Tag className="px-2.5 py-1 text-2xs">{item}</Tag>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 }

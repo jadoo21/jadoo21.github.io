@@ -24,7 +24,7 @@ describe("App", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders the work page with all project cards", async () => {
+  it("renders the work page placeholder", async () => {
     render(
       <MemoryRouter initialEntries={["/work"]}>
         <App />
@@ -32,14 +32,10 @@ describe("App", () => {
     );
 
     expect(
-      await screen.findByRole("heading", { level: 1, name: "Selected Work" }, longWait),
+      await screen.findByRole("heading", { level: 1, name: "Work" }, longWait),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("link", { name: /Keyloop ePayments Platform/ }),
-    ).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /TALLY CIS/ })).toBeInTheDocument();
-    expect(
-      screen.getByRole("link", { name: /Enterprise Retail Platform/ }),
+      screen.getByText(/selected personal projects and technical explorations will appear here/i),
     ).toBeInTheDocument();
   });
 
@@ -53,25 +49,6 @@ describe("App", () => {
     expect((await screen.findAllByText("Keyloop")).length).toBeGreaterThan(0);
     expect(screen.getAllByText("Tally Group").length).toBeGreaterThan(0);
     expect(screen.getAllByText("NCR Corporation").length).toBeGreaterThan(0);
-  });
-
-  it("renders the ePayments case study page with lifecycle and architecture blocks", async () => {
-    render(
-      <MemoryRouter initialEntries={["/work/keyloop-epayments-platform"]}>
-        <App />
-      </MemoryRouter>,
-    );
-
-    expect(
-      await screen.findByRole("heading", {
-        level: 1,
-        name: "Keyloop ePayments Platform",
-      }, longWait),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", { name: "From request to settlement" }),
-    ).toBeInTheDocument();
-    expect(screen.getByText("Settlement")).toBeInTheDocument();
   });
 
   it("shows the 404 view for unknown routes via the catch-all route", async () => {

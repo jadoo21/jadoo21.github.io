@@ -4,7 +4,7 @@ import { Container } from "../components/layout/Container";
 import { Cta } from "../components/layout/Cta";
 import { PageHeader } from "../components/layout/PageHeader";
 import { Reveal } from "../components/ui/Reveal";
-import { siteConfig } from "../data/site";
+import { siteConfig, yearsExperience } from "../data/site";
 import { formatPageMeta, usePageMeta } from "../hooks/usePageMeta";
 
 const progression = [
@@ -17,7 +17,7 @@ const progression = [
 const topics = [
   "React and TypeScript for production interfaces",
   ".NET and C# for APIs and services",
-  "Cloud platforms — AWS and Azure",
+  "Cloud platforms — AWS, with Azure at Tally",
   "Distributed systems, events and messaging",
   "Payment engineering and system design",
   "Production ownership, observability and reliability",
@@ -36,7 +36,7 @@ export default function About() {
         <PageHeader
           eyebrow="About"
           title="An engineer who thinks in systems"
-          description="Full-stack software engineer with five-plus years building enterprise applications — from the React UI through the API and services to the cloud platform behind them."
+          description={`Full-stack software engineer with ${yearsExperience()} years building enterprise applications — from the React UI through the API and services to the cloud platform behind them.`}
         />
 
         <div className="grid gap-5 pb-20 sm:pb-24 lg:grid-cols-3">
@@ -55,10 +55,10 @@ export default function About() {
                   that tie them together.
                 </p>
                 <p>
-                  Today, at Keyloop, I work on a distributed payment platform built from
-                  microservices and events — designing payment orchestration and
-                  settlement flows, building payment-provider integrations, and owning
-                  the services that keep it running correctly in production.
+                  Today, at Keyloop, I work on a distributed payment platform built
+                  from microservices and events — designing payment orchestration and
+                  settlement flows, building payment-provider integrations, and
+                  keeping the services running reliably in production.
                 </p>
                 <ul className="grid gap-x-6 gap-y-2 sm:grid-cols-2">
                   {topics.map((topic) => (
