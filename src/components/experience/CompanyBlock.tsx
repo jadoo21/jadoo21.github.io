@@ -1,17 +1,14 @@
 import { Briefcase, Check, MapPin } from "lucide-react";
 import type { ExperienceItem } from "../../types";
-import { Reveal } from "../ui/Reveal";
 import { Tag } from "../ui/Tag";
 
 interface CompanyBlockProps {
   item: ExperienceItem;
-  index: number;
 }
 
-export function CompanyBlock({ item, index }: CompanyBlockProps) {
+export function CompanyBlock({ item }: CompanyBlockProps) {
   return (
-    <Reveal delay={index * 0.05}>
-      <article className="card-surface p-6 sm:p-8">
+    <article className="rounded-xl border border-zinc-200 bg-white/50 p-6 sm:p-8 dark:border-zinc-800 dark:bg-zinc-900/50">
         <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
           <h3 className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-white">
             {item.company}
@@ -54,6 +51,5 @@ export function CompanyBlock({ item, index }: CompanyBlockProps) {
           ))}
         </ul>
       </article>
-    </Reveal>
   );
 }

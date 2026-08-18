@@ -46,7 +46,7 @@ describe("App", () => {
       </MemoryRouter>,
     );
 
-    expect((await screen.findAllByText("Keyloop")).length).toBeGreaterThan(0);
+    expect((await screen.findAllByText(/Keyloop/)).length).toBeGreaterThan(0);
     expect(screen.getAllByText("Tally Group").length).toBeGreaterThan(0);
     expect(screen.getAllByText("NCR Corporation").length).toBeGreaterThan(0);
   });
