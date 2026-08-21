@@ -1,27 +1,37 @@
-import { projects } from "../data/projects";
 import { Container } from "../components/layout/Container";
-import { PageHeader } from "../components/layout/PageHeader";
 import { Cta } from "../components/layout/Cta";
-import { ProjectCard } from "../components/projects/ProjectCard";
+import { PageHeader } from "../components/layout/PageHeader";
 import { Reveal } from "../components/ui/Reveal";
+import { formatPageMeta, usePageMeta } from "../hooks/usePageMeta";
 
 export default function Work() {
+  usePageMeta({
+    title: formatPageMeta("Work"),
+    description:
+      "Selected personal projects and technical explorations by Rishabh Roshan, a full-stack software engineer.",
+  });
+
   return (
     <>
       <Container>
         <PageHeader
           eyebrow="Work"
-          title="Selected Engineering Work"
-          description="A blend of enterprise systems built at Tally Group and NCR Corporation, and personal projects where I push architecture and engineering practice further."
+          title="Work"
+          description="Selected personal projects and technical explorations will appear here."
         />
 
-        <div className="grid gap-6 pb-20 sm:pb-24 lg:grid-cols-2">
-          {projects.map((project, index) => (
-            <Reveal key={project.slug} delay={index * 0.05} className="h-full">
-              <ProjectCard project={project} />
-            </Reveal>
-          ))}
-        </div>
+        <Reveal>
+          <div className="card-surface mb-20 flex flex-col items-start gap-3 p-8 sm:p-12">
+            <h2 className="text-balance text-xl font-semibold tracking-tight text-zinc-900 sm:text-2xl dark:text-white">
+              Coming soon.
+            </h2>
+            <p className="max-w-prose text-[15px] leading-relaxed text-zinc-600 dark:text-zinc-400">
+              I&apos;m focused on shipping production software right now. Personal
+              projects, technical write-ups and side explorations will be shared
+              here as they take shape.
+            </p>
+          </div>
+        </Reveal>
       </Container>
       <Cta />
     </>

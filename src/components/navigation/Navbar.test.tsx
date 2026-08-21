@@ -4,10 +4,10 @@ import { renderWithRouter } from "../../test/test-utils";
 import { Navbar } from "./Navbar";
 
 describe("Navbar", () => {
-  it("renders the name and primary navigation links", () => {
+  it("renders the RR brand mark and primary navigation links", () => {
     renderWithRouter(<Navbar />);
-    expect(screen.getByText("Rishabh Roshan")).toBeInTheDocument();
-    for (const label of ["Work", "Engineering", "Experience", "About"]) {
+    expect(screen.getByRole("link", { name: /Rishabh Roshan/ })).toBeInTheDocument();
+    for (const label of ["Experience", "Work", "About", "Contact"]) {
       expect(screen.getByRole("link", { name: label })).toBeInTheDocument();
     }
   });

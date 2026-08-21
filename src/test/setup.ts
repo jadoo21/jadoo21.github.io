@@ -17,6 +17,20 @@ class IntersectionObserverStub implements IntersectionObserver {
 globalThis.IntersectionObserver =
   IntersectionObserverStub as unknown as typeof IntersectionObserver;
 
+class ResizeObserverStub implements ResizeObserver {
+  observe(): void {}
+  unobserve(): void {}
+  disconnect(): void {}
+}
+
+globalThis.ResizeObserver = ResizeObserverStub as unknown as typeof ResizeObserver;
+
+// Mock window.scrollTo for testing
+Object.defineProperty(window, "scrollTo", {
+  writable: true,
+  value: () => {},
+});
+
 if (typeof window.matchMedia !== "function") {
   window.matchMedia = (query: string) =>
     ({

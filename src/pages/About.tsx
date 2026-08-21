@@ -1,41 +1,31 @@
-import { ArrowRight, Compass, Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
 import { Container } from "../components/layout/Container";
 import { Cta } from "../components/layout/Cta";
 import { PageHeader } from "../components/layout/PageHeader";
 import { Reveal } from "../components/ui/Reveal";
-import { siteConfig } from "../data/site";
+import { siteConfig, yearsExperience } from "../data/site";
 import { formatPageMeta, usePageMeta } from "../hooks/usePageMeta";
 
-const currentlyExploring = [
-  {
-    title: "System Design",
-    description: "Service boundaries, API contracts and how large systems decompose.",
-  },
-  {
-    title: "Distributed Systems",
-    description:
-      "Messaging, idempotency, retries and failure handling — the Event-Driven Platform lab is where most of this gets tested.",
-  },
-  {
-    title: "Cloud Architecture",
-    description: "Better Azure and container-based deployment patterns.",
-  },
-  {
-    title: "AI-Assisted Development",
-    description: "How tooling changes the way software gets written and reviewed.",
-  },
-  {
-    title: "Developer Tooling",
-    description: "Faster, more reliable build and feedback loops.",
-  },
+const progression = [
+  { label: "Enterprise Retail", note: "NCR · C# / .NET · React" },
+  { label: "Enterprise SaaS", note: "Tally Group · Azure · messaging" },
+  { label: "Payment Platforms", note: "Keyloop · orchestration · settlement" },
+  { label: "Distributed Systems", note: "Events · webhooks · state consistency" },
+];
+
+const topics = [
+  "React and TypeScript for production interfaces",
+  ".NET and C# for APIs and services",
+  "Cloud platforms — AWS, with Azure at Tally",
+  "Distributed systems, events and messaging",
+  "Payment engineering and system design",
+  "Production ownership, observability and reliability",
 ];
 
 export default function About() {
   usePageMeta({
     title: formatPageMeta("About"),
     description:
-      "Software engineer focused on full-stack development — React and TypeScript on the frontend, C# and .NET on the backend, Azure in the cloud.",
+      "Full-stack software engineer working across frontend experiences, backend services and cloud infrastructure — React, TypeScript, .NET and distributed systems.",
   });
 
   return (
@@ -44,10 +34,10 @@ export default function About() {
         <PageHeader
           eyebrow="About"
           title="An engineer who thinks in systems"
-          description="Software Engineer with five-plus years of experience building enterprise applications — from the React UI through the API and services to the cloud platform behind them."
+          description={`Full-stack software engineer with ${yearsExperience()} years building enterprise applications — from the React UI through the API and services to the cloud platform behind them.`}
         />
 
-        <div className="grid gap-5 pb-8 lg:grid-cols-3">
+        <div className="grid gap-5 pb-20 sm:pb-24 lg:grid-cols-3">
           <Reveal className="lg:col-span-2">
             <div className="card-surface h-full p-7 sm:p-8">
               <h2 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-white">
@@ -56,82 +46,61 @@ export default function About() {
               <div className="mt-4 space-y-4 text-[15px] leading-relaxed text-zinc-600 dark:text-zinc-400">
                 <p>{siteConfig.about}</p>
                 <p>
-                  At Tally Group I work on TALLY CIS, a SaaS platform for energy
-                  retailers. At NCR Corporation I built features for an enterprise
-                  retail product. In both, the work has been the same kind of work:
-                  React and TypeScript on the frontend, C# and .NET behind the API, and
-                  Azure and Docker for the deployment side.
+                  My career has moved from enterprise retail, through enterprise SaaS,
+                  into payment platforms and distributed systems. The work in each role
+                  has been the same kind of work — React and TypeScript on the frontend,
+                  C# and .NET behind the API, and cloud infrastructure for the systems
+                  that tie them together.
                 </p>
                 <p>
-                  This portfolio is itself the thing I&apos;m asking you to believe me
-                  about. Every interactive piece — the architecture diagrams, the React
-                  Engineering Lab, the case-study pages — runs on the same principles I
-                  use at work: typed React, reusable components, explicit states,
-                  responsive layout and clean code.
+                  Today, at Keyloop, I work on a distributed payment platform built
+                  from microservices and events — designing payment orchestration and
+                  settlement flows, building payment-provider integrations, and
+                  keeping the services running reliably in production.
                 </p>
+                <ul className="grid gap-x-6 gap-y-2 sm:grid-cols-2">
+                  {topics.map((topic) => (
+                    <li key={topic} className="flex items-start gap-2 text-sm">
+                      <span
+                        aria-hidden="true"
+                        className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-brand-500"
+                      />
+                      <span className="text-zinc-700 dark:text-zinc-300">{topic}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </Reveal>
 
           <Reveal>
             <div className="card-surface flex h-full flex-col gap-5 p-7 sm:p-8">
-              <div className="flex items-center gap-2">
-                <Compass
-                  className="h-4 w-4 text-brand-600 dark:text-brand-400"
-                  aria-hidden="true"
-                />
-                <h2 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-white">
-                  Currently exploring
-                </h2>
-              </div>
-              <ul className="flex flex-1 flex-col gap-4">
-                {currentlyExploring.map((topic) => (
-                  <li key={topic.title}>
-                    <h3 className="flex items-center gap-1.5 text-sm font-semibold text-zinc-800 dark:text-zinc-200">
-                      <Sparkles
-                        className="h-3.5 w-3.5 text-brand-500 dark:text-brand-400"
+              <h2 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-white">
+                Career progression
+              </h2>
+              <ol className="flex flex-1 flex-col justify-center gap-5">
+                {progression.map((step, index) => (
+                  <li key={step.label} className="relative flex items-start gap-3">
+                    {index < progression.length - 1 ? (
+                      <span
                         aria-hidden="true"
+                        className="absolute bottom-[-1.25rem] left-[13px] top-[14px] w-px bg-zinc-200 dark:bg-zinc-700"
                       />
-                      {topic.title}
-                    </h3>
-                    <p className="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-                      {topic.description}
-                    </p>
+                    ) : null}
+                    <span className="z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-200 bg-brand-50 font-mono text-2xs font-semibold text-brand-600 dark:border-brand-900 dark:bg-brand-950 dark:text-brand-400">
+                      0{index + 1}
+                    </span>
+                    <div className="pt-1">
+                      <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                        {step.label}
+                      </p>
+                      <p className="font-mono text-2xs text-zinc-500 dark:text-zinc-500">
+                        {step.note}
+                      </p>
+                    </div>
                   </li>
                 ))}
-              </ul>
-            </div>
-          </Reveal>
-        </div>
-
-        <div className="pb-8">
-          <Reveal>
-            <div className="card-surface flex flex-col items-start gap-6 p-7 sm:flex-row sm:items-center sm:justify-between sm:p-8">
-              <div>
-                <h2 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-white">
-                  See the work
-                </h2>
-                <p className="mt-1.5 max-w-prose text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-                  The engineering page covers the stack, the decisions and the
-                  architecture — and the case studies show where it was actually
-                  applied.
-                </p>
-              </div>
-              <div className="flex shrink-0 flex-wrap gap-3">
-                <Link
-                  to="/work"
-                  className="inline-flex items-center gap-1.5 rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-700"
-                >
-                  Explore the work
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-                <Link
-                  to="/engineering"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-300 bg-white px-4 py-2.5 text-sm font-medium text-zinc-900 transition-colors hover:border-zinc-400 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:border-zinc-600 dark:hover:bg-zinc-800"
-                >
-                  Engineering
-                </Link>
-              </div>
+              </ol>
             </div>
           </Reveal>
         </div>
