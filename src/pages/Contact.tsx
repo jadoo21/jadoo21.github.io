@@ -1,9 +1,52 @@
 import { Download, Github, Linkedin, Mail, MapPin } from "lucide-react";
+import type { ReactNode } from "react";
 import { Container } from "../components/layout/Container";
 import { PageHeader } from "../components/layout/PageHeader";
 import { Reveal } from "../components/ui/Reveal";
 import { siteConfig } from "../data/site";
 import { formatPageMeta, usePageMeta } from "../hooks/usePageMeta";
+
+interface ContactCardProps {
+  href: string;
+  icon: ReactNode;
+  label: string;
+  value: string;
+  download?: boolean;
+  external?: boolean;
+}
+
+function ContactCard({
+  href,
+  icon,
+  label,
+  value,
+  download,
+  external,
+}: ContactCardProps) {
+  return (
+    <Reveal>
+      <a
+        href={href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noreferrer" : undefined}
+        className="card-surface group flex h-full flex-col gap-3 p-7 transition-shadow hover:shadow-card-hover"
+        download={download}
+      >
+        <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-950 dark:text-brand-400">
+          {icon}
+        </span>
+        <div>
+          <h2 className="text-base font-semibold text-zinc-900 dark:text-white">
+            {label}
+          </h2>
+          <p className="mt-1 font-mono text-sm break-all text-zinc-600 group-hover:text-brand-700 dark:text-zinc-400 dark:group-hover:text-brand-300">
+            {value}
+          </p>
+        </div>
+      </a>
+    </Reveal>
+  );
+}
 
 export default function Contact() {
   usePageMeta({
@@ -22,86 +65,33 @@ export default function Contact() {
         />
 
         <div className="grid gap-5 pb-20 sm:pb-24 lg:grid-cols-3">
-          <Reveal>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="card-surface group flex h-full flex-col gap-3 p-7 transition-shadow hover:shadow-card-hover"
-            >
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-950 dark:text-brand-400">
-                <Mail className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <div>
-                <h2 className="text-base font-semibold text-zinc-900 dark:text-white">
-                  Email
-                </h2>
-                <p className="mt-1 font-mono text-sm break-all text-zinc-600 group-hover:text-brand-700 dark:text-zinc-400 dark:group-hover:text-brand-300">
-                  {siteConfig.email}
-                </p>
-              </div>
-            </a>
-          </Reveal>
-
-          <Reveal>
-            <a
-              href={siteConfig.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="card-surface group flex h-full flex-col gap-3 p-7 transition-shadow hover:shadow-card-hover"
-            >
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-950 dark:text-brand-400">
-                <Linkedin className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <div>
-                <h2 className="text-base font-semibold text-zinc-900 dark:text-white">
-                  LinkedIn
-                </h2>
-                <p className="mt-1 font-mono text-sm break-all text-zinc-600 group-hover:text-brand-700 dark:text-zinc-400 dark:group-hover:text-brand-300">
-                  linkedin.com/in/rishabh-roshan
-                </p>
-              </div>
-            </a>
-          </Reveal>
-
-          <Reveal>
-            <a
-              href={siteConfig.github}
-              target="_blank"
-              rel="noreferrer"
-              className="card-surface group flex h-full flex-col gap-3 p-7 transition-shadow hover:shadow-card-hover"
-            >
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-950 dark:text-brand-400">
-                <Github className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <div>
-                <h2 className="text-base font-semibold text-zinc-900 dark:text-white">
-                  GitHub
-                </h2>
-                <p className="mt-1 font-mono text-sm break-all text-zinc-600 group-hover:text-brand-700 dark:text-zinc-400 dark:group-hover:text-brand-300">
-                  github.com/jadoo21
-                </p>
-              </div>
-            </a>
-          </Reveal>
-
-          <Reveal>
-            <a
-              href={siteConfig.resumeUrl}
-              className="card-surface group flex h-full flex-col gap-3 p-7 transition-shadow hover:shadow-card-hover"
-              download
-            >
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-950 dark:text-brand-400">
-                <Download className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <div>
-                <h2 className="text-base font-semibold text-zinc-900 dark:text-white">
-                  Resume
-                </h2>
-                <p className="mt-1 font-mono text-sm text-zinc-600 group-hover:text-brand-700 dark:text-zinc-400 dark:group-hover:text-brand-300">
-                  Rishabh-Roshan-Resume.pdf
-                </p>
-              </div>
-            </a>
-          </Reveal>
+          <ContactCard
+            href={`mailto:${siteConfig.email}`}
+            icon={<Mail className="h-5 w-5" aria-hidden="true" />}
+            label="Email"
+            value={siteConfig.email}
+          />
+          <ContactCard
+            href={siteConfig.linkedin}
+            icon={<Linkedin className="h-5 w-5" aria-hidden="true" />}
+            label="LinkedIn"
+            value="linkedin.com/in/rishabh-roshan"
+            external
+          />
+          <ContactCard
+            href={siteConfig.github}
+            icon={<Github className="h-5 w-5" aria-hidden="true" />}
+            label="GitHub"
+            value="github.com/jadoo21"
+            external
+          />
+          <ContactCard
+            href={siteConfig.resumeUrl}
+            icon={<Download className="h-5 w-5" aria-hidden="true" />}
+            label="Resume"
+            value="Rishabh-Roshan-Resume.pdf"
+            download
+          />
 
           <Reveal className="lg:col-span-2">
             <div className="card-surface h-full p-7 sm:p-8">

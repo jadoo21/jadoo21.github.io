@@ -3,10 +3,10 @@
 Place your professional portrait here:
 
 ```
-/public/images/rishabh-roshan.jpg
+/public/images/rishabh-roshan.png
 ```
 
-The Home hero references it at `/images/rishabh-roshan.jpg` (see `siteConfig.photoUrl`
+The Home hero references it at `/images/rishabh-roshan.png` (see `siteConfig.photoUrl`
 in `src/data/site.ts`). Until the file exists, the hero shows a subtle placeholder
 frame instead of the photo.
 

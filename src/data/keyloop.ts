@@ -1,4 +1,3 @@
-export const keyloopCompany = "Keyloop";
 export const keyloopRole = "Software Engineer 2";
 
 export const currentlyAt = {

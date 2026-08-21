@@ -2,18 +2,11 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Download, Github, Linkedin, Menu, Moon, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
-import { siteConfig } from "../../data/site";
+import { siteConfig, navLinks } from "../../data/site";
 import { useScrolled } from "../../hooks/useScrolled";
 import { useTheme } from "../../hooks/useTheme";
 import { cn } from "../../lib/cn";
 import { Button } from "../ui/Button";
-
-const navLinks = [
-  { to: "/experience", label: "Experience" },
-  { to: "/work", label: "Work" },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
-];
 
 function NavLinkItem({ to, label }: { to: string; label: string }) {
   return (
@@ -199,7 +192,7 @@ export function Navbar() {
                     aria-hidden="true"
                     className="h-6 w-6"
                   />
-                  Software Engineer
+                  {siteConfig.title}
                 </span>
                 <button
                   type="button"

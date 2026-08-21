@@ -4,7 +4,7 @@ import { currentlyAt } from "../../data/keyloop";
 import { Container } from "../layout/Container";
 import { Section } from "../layout/Section";
 import { Reveal } from "../ui/Reveal";
-import { Tag } from "../ui/Tag";
+import { TagList } from "../ui/Tag";
 
 export function CurrentlyAt() {
   return (
@@ -42,13 +42,7 @@ export function CurrentlyAt() {
                 <p className="font-mono text-2xs uppercase tracking-wider text-zinc-500 dark:text-zinc-500">
                   Focus areas
                 </p>
-                <ul className="mt-4 flex flex-wrap gap-2">
-                  {currentlyAt.badges.map((badge) => (
-                    <li key={badge}>
-                      <Tag className="px-2.5 py-1 text-2xs">{badge}</Tag>
-                    </li>
-                  ))}
-                </ul>
+                <TagList items={currentlyAt.badges} />
               </div>
             </div>
           </div>

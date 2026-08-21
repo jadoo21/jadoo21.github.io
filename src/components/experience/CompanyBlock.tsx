@@ -1,6 +1,6 @@
 import { Briefcase, Check, MapPin } from "lucide-react";
 import type { ExperienceItem } from "../../types";
-import { Tag } from "../ui/Tag";
+import { TagList } from "../ui/Tag";
 
 interface CompanyBlockProps {
   item: ExperienceItem;
@@ -43,13 +43,7 @@ export function CompanyBlock({ item }: CompanyBlockProps) {
           ))}
         </ul>
 
-        <ul className="mt-5 flex flex-wrap gap-2">
-          {item.technologies.map((tech) => (
-            <li key={tech}>
-              <Tag>{tech}</Tag>
-            </li>
-          ))}
-        </ul>
+        <TagList items={item.technologies} className="mt-5" />
       </article>
   );
 }

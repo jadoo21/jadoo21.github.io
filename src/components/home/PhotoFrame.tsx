@@ -34,7 +34,7 @@ export function PhotoFrame() {
           Rishabh Roshan
         </p>
         <p className="mt-0.5 font-mono text-2xs text-zinc-500 dark:text-zinc-500">
-          Software Engineer · Hyderabad, India
+          {siteConfig.title} · {siteConfig.location}
         </p>
       </figcaption>
     </figure>

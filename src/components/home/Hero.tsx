@@ -31,7 +31,7 @@ export function Hero() {
         <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,360px)] lg:gap-16">
           <div>
             <motion.p {...fadeIn(0)} className="eyebrow mb-5">
-              Software Engineer
+              {siteConfig.title}
             </motion.p>
 
             <motion.h1
@@ -107,7 +107,6 @@ export function Hero() {
           <motion.div
             {...fadeIn(0.15)}
             className="hidden lg:block"
-            aria-hidden="false"
           >
             <PhotoFrame />
           </motion.div>

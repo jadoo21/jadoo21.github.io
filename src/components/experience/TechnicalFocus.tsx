@@ -1,6 +1,6 @@
 import { technicalFocus } from "../../data/keyloop";
 import { Reveal } from "../ui/Reveal";
-import { Tag } from "../ui/Tag";
+import { TagList } from "../ui/Tag";
 
 export function TechnicalFocus() {
   return (
@@ -15,13 +15,7 @@ export function TechnicalFocus() {
               <h4 className="text-sm font-semibold tracking-tight text-zinc-900 dark:text-white">
                 {group.title}
               </h4>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {group.items.map((item) => (
-                  <li key={item}>
-                    <Tag>{item}</Tag>
-                  </li>
-                ))}
-              </ul>
+              <TagList items={group.items} className="mt-3" />
             </div>
           </Reveal>
         ))}

@@ -6,9 +6,10 @@ import {
   whatIWorkOn,
 } from "../../data/keyloop";
 import { experience } from "../../data/experience";
+import { siteConfig } from "../../data/site";
 import { SectionHeader } from "../layout/SectionHeader";
 import { TechnicalFocus } from "./TechnicalFocus";
-import { Tag } from "../ui/Tag";
+import { TagList } from "../ui/Tag";
 
 export function KeyloopExperience() {
   const keyloop = experience.find((item) => item.company === "Keyloop");
@@ -56,7 +57,7 @@ export function KeyloopExperience() {
         </ul>
         <p className="mt-4 inline-flex items-center gap-1 font-mono text-2xs text-zinc-500 dark:text-zinc-500">
           <MapPin className="h-3 w-3" aria-hidden="true" />
-          Hyderabad, India
+          {siteConfig.location}
         </p>
       </section>
 
@@ -68,13 +69,7 @@ export function KeyloopExperience() {
           Experience integrating payment-provider workflows across the ePayments
           platform, including:
         </p>
-        <ul className="mt-4 flex flex-wrap gap-2">
-          {paymentProviders.map((provider) => (
-            <li key={provider}>
-              <Tag className="px-2.5 py-1 text-2xs">{provider}</Tag>
-            </li>
-          ))}
-        </ul>
+        <TagList items={paymentProviders} className="mt-4" />
       </section>
 
       <TechnicalFocus />
@@ -88,13 +83,7 @@ export function KeyloopExperience() {
           sprint-based delivery, collaborating across engineering and product
           teams from planning through production.
         </p>
-        <ul className="mt-4 flex flex-wrap gap-2">
-          {howWeDeliver.map((item) => (
-            <li key={item}>
-              <Tag className="px-2.5 py-1 text-2xs">{item}</Tag>
-            </li>
-          ))}
-        </ul>
+        <TagList items={howWeDeliver} className="mt-4" />
       </section>
     </div>
   );

@@ -3,7 +3,7 @@ import { Container } from "../layout/Container";
 import { Reveal } from "../ui/Reveal";
 
 const snapshot = [
-  { value: "5+", label: "Years", sublabel: "Software Engineering" },
+  { label: "Years", sublabel: "Software Engineering" },
   { value: "3", label: "Companies", sublabel: "Enterprise Software" },
   { value: "Full Stack", label: "Development", sublabel: "React + .NET" },
   { value: "Cloud & Platform", label: "Engineering", sublabel: "AWS + Docker" },

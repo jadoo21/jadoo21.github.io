@@ -23,8 +23,8 @@ Verification order: `lint` -> `typecheck` -> `test`. `build` is the full gate (C
 
 ## Architecture
 
-- **Content-driven**: all user-facing content lives in typed data files under `src/data/` (`site.ts`, `timeline.ts`, `keyloop.ts`, `technologies.ts`, `projects.ts`, `caseStudies.ts`, `experience.ts`). Update case studies / projects / experience there; do not touch UI code for content edits.
-- **`src/data/site.ts`** is central config: `github` is an intentionally-empty placeholder (adding it wires navbar/footer/CTA/contact automatically); resume lives at `public/Rishabh-Roshan-Resume.pdf` and portfolio portrait at `public/images/rishabh-roshan.png`.
+- **Content-driven**: all user-facing content lives in typed data files under `src/data/` (`site.ts`, `timeline.ts`, `keyloop.ts`, `technologies.ts`, `experience.ts`). Update experience / timeline / technologies there; do not touch UI code for content edits.
+- **`src/data/site.ts`** is central config. `siteConfig.github` controls GitHub link visibility in navbar, footer, CTA and contact page. `navLinks` is the shared navigation array used by both Navbar and Footer. Resume lives at `public/Rishabh-Roshan-Resume.pdf` and portfolio portrait at `public/images/rishabh-roshan.png`.
 - **Routing**: every page in `src/pages/` is lazy-loaded in `src/App.tsx` under one `Suspense` fallback. New routes follow that pattern (lazy import + `<Route path=...>`).
 - Tailwind tokens: `brand` (indigo), `surface`, font `InterVariable` (imported in `src/main.tsx` via `@fontsource-variable/inter`). Dark mode uses the `class` strategy (`html.dark`).
 

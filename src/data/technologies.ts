@@ -85,18 +85,6 @@ export const stackGroups: StackGroup[] = [
   },
 ];
 
-export function slugForName(name: string): string | undefined {
-  const direct = techCatalog[name]?.slug;
-  if (direct) return direct;
-  const aliases: Record<string, string> = {
-    ".NET": "dotnet",
-    "C#": "csharp",
-    "SQL Server": "sqlserver",
-    "New Relic": "newrelic",
-  };
-  return aliases[name] || undefined;
-}
-
 export const specializations: Specialization[] = [
   {
     title: "Distributed Systems",

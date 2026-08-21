@@ -16,6 +16,13 @@ export const siteConfig = {
     "I'm a full-stack software engineer who enjoys working across frontend experiences, backend services and cloud infrastructure.",
 } as const;
 
+export const navLinks = [
+  { to: "/experience", label: "Experience" },
+  { to: "/work", label: "Work" },
+  { to: "/about", label: "About" },
+  { to: "/contact", label: "Contact" },
+] as const;
+
 /**
  * Earliest professional experience (NCR Corporation). The career snapshot
  * derives the "X+ Years" metric from this date so it stays current without

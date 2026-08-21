@@ -92,18 +92,18 @@ export const siteConfig = {
   title: "Software Engineer",
   email: "rishabh.sanjiv@gmail.com",
   linkedin: "https://www.linkedin.com/in/rishabh-roshan/",
-  github: "", // <-- add your GitHub profile URL here
+  github: "https://github.com/jadoo21",
   resumeUrl: "/Rishabh-Roshan-Resume.pdf",
-  photoUrl: "/images/rishabh-roshan.jpg", // <-- drop a portrait in public/images/
+  photoUrl: "/images/rishabh-roshan.png", // <-- drop a portrait in public/images/
   // ...
 };
 ```
 
-- The **GitHub URL is intentionally empty**. Add it in `siteConfig.github` and the
-  navbar, footer, CTA and contact page will pick it up automatically.
+- The **GitHub URL** is configured in `siteConfig.github`. Adding or removing it
+  automatically toggles the GitHub link in the navbar, footer, CTA and contact page.
 - Place the resume PDF at `public/Rishabh-Roshan-Resume.pdf`. Until it exists,
   Resume buttons point at the expected path.
-- Place a professional portrait at `public/images/rishabh-roshan.jpg`. Until it
+- Place a professional portrait at `public/images/rishabh-roshan.png`. Until it
   exists, the hero shows a subtle placeholder frame.
 
 ### Design philosophy

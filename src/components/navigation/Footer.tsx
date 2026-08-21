@@ -1,6 +1,6 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
-import { siteConfig } from "../../data/site";
+import { siteConfig, navLinks } from "../../data/site";
 import { Container } from "../layout/Container";
 
 export function Footer() {
@@ -15,7 +15,7 @@ export function Footer() {
               {siteConfig.name}
             </p>
             <p className="mt-0.5 text-sm text-zinc-600 dark:text-zinc-400">
-              Software Engineer
+              {siteConfig.title}
             </p>
             <p className="mt-2 font-mono text-2xs text-zinc-500 dark:text-zinc-500">
               React • TypeScript • .NET • Cloud
@@ -23,30 +23,15 @@ export function Footer() {
           </div>
 
           <nav aria-label="Footer" className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            <Link
-              to="/experience"
-              className="text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
-            >
-              Experience
-            </Link>
-            <Link
-              to="/work"
-              className="text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
-            >
-              Work
-            </Link>
-            <Link
-              to="/about"
-              className="text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
-            >
-              About
-            </Link>
-            <Link
-              to="/contact"
-              className="text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
-            >
-              Contact
-            </Link>
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+              >
+                {link.label}
+              </Link>
+            ))}
           </nav>
 
           <div className="flex items-center gap-2">
