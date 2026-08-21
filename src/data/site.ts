@@ -6,7 +6,7 @@ export const siteConfig = {
   linkedin: "https://www.linkedin.com/in/rishabh-roshan/",
   github: "https://github.com/jadoo21",
   resumeUrl: "/Rishabh-Roshan-Resume.pdf",
-  photoUrl: "/images/rishabh-roshan.jpg",
+  photoUrl: "/images/rishabh-roshan.png",
   url: "https://rishabhroshan.dev",
   positioning: ["React", "TypeScript", ".NET", "AWS"],
   tagline: "Building systems that scale.",

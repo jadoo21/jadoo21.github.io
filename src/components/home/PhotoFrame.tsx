@@ -16,7 +16,7 @@ export function PhotoFrame() {
               Portrait placeholder.
               <br />
               Add <code className="rounded bg-white px-1 py-0.5 dark:bg-zinc-800">
-                public/images/rishabh-roshan.jpg
+                public/images/rishabh-roshan.png
               </code>
             </p>
           </div>

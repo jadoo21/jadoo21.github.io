@@ -70,9 +70,12 @@ export function Navbar() {
           aria-label="Rishabh Roshan — Software Engineer"
           className="flex items-center gap-2 rounded-md font-semibold tracking-tight text-zinc-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 dark:text-white"
         >
-          <span className="flex h-7 w-7 items-center justify-center rounded-md bg-brand-600 text-2xs font-bold text-white">
-            RR
-          </span>
+          <img
+            src="/images/logo.png"
+            alt=""
+            aria-hidden="true"
+            className="h-8 w-8"
+          />
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">
@@ -190,9 +193,12 @@ export function Navbar() {
             >
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-sm font-semibold text-zinc-900 dark:text-white">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-md bg-brand-600 text-2xs font-bold text-white">
-                    RR
-                  </span>
+                  <img
+                    src="/images/logo.png"
+                    alt=""
+                    aria-hidden="true"
+                    className="h-6 w-6"
+                  />
                   Software Engineer
                 </span>
                 <button
